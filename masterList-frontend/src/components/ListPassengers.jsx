@@ -30,7 +30,6 @@ export const ListPassengers = () => {
 
     function removePassenger(id){
          console.log(id);
-    
          deletePassenger(id).then((response)=>{
             getAllPassengers();
          }).catch(error=>{
@@ -53,7 +52,7 @@ export const ListPassengers = () => {
                     <th>Berth</th>
                     <th>Food</th>
                     <th>DOB</th>
-                    
+    
                     <th>ID type</th>
                     <th>Id no.</th>
                     <th>Senior Citizen</th>
@@ -71,11 +70,8 @@ export const ListPassengers = () => {
                            <td>{passenger.berth}</td>
                            <td>{passenger.food}</td>
                            <td>{passenger.dob}</td>
-                           
-                           {console.log(passenger.seniorCitizen)}
                            <td>{passenger.idType}</td>
                            <td>{passenger.idNumber}</td>
-
                            <td>{passenger.seniorCitizen?'true':'false'}</td>
                            
                            <td style={{display:"flex",justifyContent:"space-between"}}>
