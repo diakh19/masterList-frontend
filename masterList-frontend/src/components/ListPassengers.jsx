@@ -46,7 +46,7 @@ export const ListPassengers = () => {
         <table className='table table-striped table-hover table-bordered'>
             <thead>
                 <tr>
-                    <th>Passnger Id</th>
+                    <th>Passenger Id</th>
                     <th>Passenger Name</th>
                     <th>Passenger Type</th>
                     <th>Gender</th>
@@ -78,8 +78,8 @@ export const ListPassengers = () => {
 
                            <td>{passenger.seniorCitizen?'true':'false'}</td>
                            
-                           <td >
-                            <button className='btn btn-info' onClick={()=> updatePassenger(passenger.id)}>Update</button>
+                           <td style={{display:"flex",justifyContent:"space-between"}}>
+                            <button className='btn btn-info ' onClick={()=> updatePassenger(passenger.id)}>Update</button>
                             <button className='btn btn-danger' onClick={()=>removePassenger(passenger.id)} style={{marginLeft:"10px"}}>Delete</button>
                            </td>
                         </tr>)

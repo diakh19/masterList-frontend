@@ -182,7 +182,9 @@ export const Passenger = () => {
   const onchangeI = (event) =>  setIdType(event.target.value);
   
   return (
-    <div className='card offset-md-3 offset-md-3' style={{ width: "50em", marginTop: "114px", marginBottom: "80px" }}>
+    <div style={{margin:"50px",justifyContent: "center",
+    display: "flex"}}>
+    <div className='card ' style={{ width: "50em", marginTop: "100px", marginBottom: "80px" }}>
       <br></br>
       <div className='card-body'>
 
@@ -192,7 +194,7 @@ export const Passenger = () => {
           <div className={`mb-3 row border-0 form-control ${errors.passengerType ? 'is-invalid' : ''}`} style={{ display: "flex" }}>
             <label htmlFor="passengerType" className="col-sm-3 col-form-label">Passenger type</label>
             <div className="col-sm-9" style={{ paddingTop: "calc(.375rem + var(--bs-border-width))" }}>
-              <div className="form-check form-check-inline">Name
+              <div className="form-check form-check-inline">
                 <input className="form-check-input" type="radio" name="passengerType" id="passengerType1" value="Normal User" onChange={(e) =>
                   setPassengerType(e.target.value)} checked={passengerType === "Normal User"} />
                 <label className="form-check-label" for="passengerType1">Normal User</label>
@@ -338,6 +340,7 @@ export const Passenger = () => {
 
         </Form>
       </div>
+    </div>
     </div>
   )
 }
