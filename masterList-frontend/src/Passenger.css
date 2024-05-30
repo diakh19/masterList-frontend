@@ -1,0 +1,15 @@
+.container {
+    background-color: white;
+    padding: 50px;
+    border-radius: 10px;
+    width: 500px;
+}
+
+.heading {
+    padding-bottom: 0px;
+    margin-bottom: 15px;
+    font-size: xx-large;
+}
+
+
+
