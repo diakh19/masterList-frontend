@@ -38,6 +38,8 @@ export const ListPassengers = () => {
     }
 
   return (
+    <>
+    {(passengers.length>0)?
     <div className='container' style={{marginTop:"75px",marginBottom:"80px"}}>
         <h2 className='text-center'> SAVED PASSENGERS</h2>
         <button className='btn btn-outline-dark mb-2'onClick={addNewPassenger}>ADD PASSENGER</button>
@@ -84,7 +86,14 @@ export const ListPassengers = () => {
             </tbody>
         </table>
         </div>
-    </div>
+              </div>
+              : <div className="text-center" style={{ marginTop: "25%" }}>
+                  <h2 className='text-center ' > NO ACTIVE  PASSENGERS</h2>
+                  <button type="button" className='btn btn-outline-dark mb-2 mt-2' onClick={addNewPassenger}>ADD PASSENGER</button>
+              </div>
+
+            }
+     </>
   )
 }
 
