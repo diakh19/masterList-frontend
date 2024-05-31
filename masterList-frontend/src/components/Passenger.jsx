@@ -197,17 +197,17 @@ export const Passenger = () => {
               <div className="form-check form-check-inline">
                 <input className="form-check-input" type="radio" name="passengerType" id="passengerType1" value="Normal User" onChange={(e) =>
                   setPassengerType(e.target.value)} checked={passengerType === "Normal User"} />
-                <label className="form-check-label" for="passengerType1">Normal User</label>
+                <label className="form-check-label" htmlFor="passengerType1">Normal User</label>
               </div>
               <div className="form-check form-check-inline">
                 <input className="form-check-input" type="radio" name="passengerType" id="passengerType2" value="Person With Disablity/Escort" onChange={(e) =>
                   setPassengerType(e.target.value)} checked={passengerType === "Person With Disablity/Escort"} />
-                <label className="form-check-label" for="passengerType2">Person With Disablity/Escort</label>
+                <label className="form-check-label" htmlFor="passengerType2">Person With Disablity/Escort</label>
               </div>
               <div className="form-check form-check-inline">
                 <input className="form-check-input" type="radio" name="passengerType" id="passengerType3" value="Journalist" onChange={(e) =>
                   setPassengerType(e.target.value)} checked={passengerType === "Journalist"} />
-                <label className="form-check-label" for="passengerType3">Journalist</label>
+                <label className="form-check-label" htmlFor="passengerType3">Journalist</label>
               </div>
               {errors.passengerType && <div className='invalid-feedback' style={{ display: "flex" }}>{errors.passengerType}</div>}
             </div>
@@ -235,7 +235,7 @@ export const Passenger = () => {
                 value={dob}
                 className={`form-control ${errors.dob ? 'is-invalid' : ''}`}
                 onChange={(e) =>
-                  setDob(e.target.value)} for="inputDate" />
+                  setDob(e.target.value)} htmlFor="inputDate" />
               {errors.dob && <div className='invalid-feedback'>{errors.dob}</div>}
             </div>
           </div>
@@ -248,17 +248,17 @@ export const Passenger = () => {
               <div className="form-check form-check-inline">
                 <input className="form-check-input" type="radio" name="gender" id="male" value="MALE" onChange={(e) =>
                   setGender(e.target.value)} checked={gender === "MALE"} />
-                <label className="form-check-label" for="male">Male</label>
+                <label className="form-check-label" htmlFor="male">Male</label>
               </div>
               <div className="form-check form-check-inline">
                 <input className="form-check-input" type="radio" value="FEMALE" name="gender" onChange={(e) =>
                   setGender(e.target.value)} checked={gender === "FEMALE"} id="female" />
-                <label className="form-check-label" for="female">Female</label>
+                <label className="form-check-label" htmlFor="female">Female</label>
               </div>
               <div className="form-check form-check-inline">
                 <input className="form-check-input" type="radio" value="TRANS" name="gender" onChange={(e) =>
                   setGender(e.target.value)} checked={gender === "TRANS"} id="trans" />
-                <label className="form-check-label" for="trans">TransGender</label>
+                <label className="form-check-label" htmlFor="trans">TransGender</label>
               </div>
               {errors.gender && <div className='invalid-feedback' style={{ display: "flex" }}>{errors.gender}</div>}
             </div>
@@ -333,9 +333,9 @@ export const Passenger = () => {
           </div>
 
           <div style={{ display: "flex" }}>
-            <button type="button" class="btn btn-primary btn-lg" onClick={saveOrUpdatePassenger} style={{ marginRight: "25px" }}
+            <button type="button" className="btn btn-primary btn-lg" onClick={saveOrUpdatePassenger} style={{ marginRight: "25px" }}
             >Save</button>
-            <button type="button" class="btn btn-secondary btn-lg" onClick={resetAll} >Reset</button>
+            <button type="button" className="btn btn-secondary btn-lg" onClick={resetAll} >Reset</button>
           </div>
 
         </Form>
