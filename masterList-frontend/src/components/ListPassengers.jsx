@@ -47,18 +47,18 @@ export const ListPassengers = () => {
         <table className='table table-striped table-hover table-bordered'>
             <thead>
                 <tr>
-                    <th>Passenger Id</th>
-                    <th>Passenger Name</th>
-                    <th>Passenger Type</th>
-                    <th>Gender</th>
-                    <th>Berth</th>
-                    <th>Food</th>
-                    <th>DOB</th>
+                    <th style={{verticalAlign:"middle"}}>S.NO.</th>
+                    <th style={{verticalAlign:"middle"}}>Passenger Name</th>
+                    <th style={{verticalAlign:"middle"}}>Passenger Type</th>
+                    <th style={{verticalAlign:"middle"}}>Gender</th>
+                    <th style={{verticalAlign:"middle"}}>Berth</th>
+                    <th style={{verticalAlign:"middle"}}>Food</th>
+                    <th style={{verticalAlign:"middle"}}>DOB</th>
     
-                    <th>ID type</th>
-                    <th>Id no.</th>
-                    <th>Senior Citizen</th>
-                    <th>Actions</th>
+                    <th style={{verticalAlign:"middle"}}>ID type</th>
+                    <th style={{verticalAlign:"middle"}}>Id no.</th>
+                    <th style={{verticalAlign:"middle"}}>Senior Citizen</th>
+                    <th style={{verticalAlign:"middle"}}>Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -66,15 +66,15 @@ export const ListPassengers = () => {
                     passengers.map((passenger,num)=>
                         <tr key={passenger.id}>
                             <td>{num+1}</td>
-                           <td>{passenger.fullName}</td>
-                           <td>{passenger.passengerType}</td>
-                           <td>{passenger.gender}</td>
-                           <td>{passenger.berth}</td>
-                           <td>{passenger.food}</td>
-                           <td>{passenger.dob}</td>
-                           <td>{passenger.idType}</td>
-                           <td>{passenger.idNumber}</td>
-                           <td>{passenger.seniorCitizen?'true':'false'}</td>
+                           <td style={{verticalAlign:"middle"}}>{passenger.fullName}</td>
+                           <td style={{verticalAlign:"middle"}}>{passenger.passengerType}</td>
+                           <td style={{verticalAlign:"middle"}}>{passenger.gender}</td>
+                           <td style={{verticalAlign:"middle"}}>{passenger.berth}</td>
+                           <td style={{verticalAlign:"middle"}}>{passenger.food}</td>
+                           <td style={{verticalAlign:"middle"}}>{passenger.dob}</td>
+                           <td style={{verticalAlign:"middle"}}>{passenger.idType}</td>
+                           <td style={{verticalAlign:"middle"}}>{passenger.idNumber}</td>
+                           <td style={{verticalAlign:"middle"}}>{passenger.seniorCitizen?'true':'false'}</td>
                            
                            <td style={{display:"flex",justifyContent:"space-between"}}>
                             <button className='btn btn-info ' onClick={()=> updatePassenger(passenger.id)}>Update</button>
