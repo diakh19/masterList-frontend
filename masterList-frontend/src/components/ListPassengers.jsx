@@ -57,7 +57,7 @@ export const ListPassengers = () => {
     
                     <th style={{verticalAlign:"middle"}}>ID type</th>
                     <th style={{verticalAlign:"middle"}}>Id no.</th>
-                    <th style={{verticalAlign:"middle"}}>Senior Citizen</th>
+                    
                     <th style={{verticalAlign:"middle"}}>Actions</th>
                 </tr>
             </thead>
@@ -74,8 +74,6 @@ export const ListPassengers = () => {
                            <td style={{verticalAlign:"middle"}}>{passenger.dob}</td>
                            <td style={{verticalAlign:"middle"}}>{passenger.idType}</td>
                            <td style={{verticalAlign:"middle"}}>{passenger.idNumber}</td>
-                           <td style={{verticalAlign:"middle"}}>{passenger.seniorCitizen?'true':'false'}</td>
-                           
                            <td style={{display:"flex",justifyContent:"space-between"}}>
                             <button className='btn btn-info ' onClick={()=> updatePassenger(passenger.id)}>Update</button>
                             <button className='btn btn-danger' onClick={()=>removePassenger(passenger.id)} style={{marginLeft:"10px"}}>Delete</button>
