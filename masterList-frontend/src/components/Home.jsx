@@ -5,7 +5,7 @@ export const Home = () => {
     return (
         <div>
             <div style={{ backgroundImage: "url(src/images/train.jpg)", width: '100%', height: "100vh", backgroundRepeat: "round", backgroundsize: "cover", overflow: "scroll" }}>
-                <div className="card mx-auto" style={{ width: "20rem", marginTop: "15rem" }}>
+                <div className="card mx-auto" style={{ width: "20rem", marginTop: "15rem",marginBottom:"3rem" }}>
                     <img className="card-img-top" src="src/images/passenger.png" alt="Card image cap"></img>
                     <div className="card-body text-center">
                         <h5 className="card-title">My Profile</h5>

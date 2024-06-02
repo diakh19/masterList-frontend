@@ -1,18 +1,14 @@
 import { useState } from 'react'
-
 import './App.css'
 import { ListPassengers } from './components/ListPassengers'
 import { Header } from './components/Header'
 import { Footer } from './components/Footer'
-
-import {BrowserRouter,Routes,Route} from "react-router-dom"
+import { BrowserRouter, Routes, Route } from "react-router-dom"
 import { Passenger } from './components/Passenger'
 import { Home } from './components/Home'
 
 
 function App() {
-
-
   return (
     //fragment tag
     <>
@@ -30,13 +26,9 @@ function App() {
 
           {/* //http://localhost:3000/edit-passenger */}
           <Route path='/edit-passenger/:id' element={<Passenger />}></Route>
-
-
         </Routes>
-
         <Footer />
       </BrowserRouter>
-
     </>
   )
 }

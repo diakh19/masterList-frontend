@@ -5,7 +5,7 @@ export const Header = () => {
   return (
     
     <div>
-      <header className='header header fixed-top'>
+      <header className='header  fixed-top'>
       <a  className="title " href='/'>Master List</a>
       <a  className="home  " href='/'>Home</a>
       </header>

@@ -20,7 +20,6 @@ export const Passenger = () => {
     berth: Yup.string().required('berth preference is required'),
     food: Yup.string().required('Food choice is required'),
     dob: Yup.string().required('dob is required'),
-
     idType: Yup.string().required('id Type is required'),
     idNumber: Yup.string().required('Card Number is required')
 
@@ -73,7 +72,6 @@ export const Passenger = () => {
         else {
           alert("Passenger can't be updated as another passenger with same id no and type exists already")
           navigator('/passengers');
-
         }
 
       })
@@ -100,13 +98,13 @@ export const Passenger = () => {
   };
 
   const pageTitle = () => {
-    return id ? <h2 className='text-center'>Update Passenger</h2> : <h2 className='text-center'>Add Passenger</h2>
+    return id ? "Update Passenger" : "Add Passenger"
   }
 
 
   const pageBottom = () => {
-    return id ? <div style={{ display: "flex" }}><button type="submit" className="btn btn-primary btn-lg" disabled={isSubmitting} style={{ marginRight: "25px" }}
-    >Update</button> </div> : (<div style={{ display: "flex" }}>
+    return id ? <div className='bottom' ><button type="submit" className="btn btn-primary btn-lg" disabled={isSubmitting} style={{ marginRight: "25px" }}
+    >Update</button> </div> : (<div className='bottom'>
       <button type="submit" className="btn btn-primary btn-lg" disabled={isSubmitting} style={{ marginRight: "25px" }}
       >Save</button>
       <button type="reset" className="btn btn-secondary btn-lg" onClick={reset} style={{ marginRight: "25px" }}>Reset</button> </div>)
@@ -115,31 +113,30 @@ export const Passenger = () => {
 
   return (
     <>
-      <div style={{
-        margin: "50px", justifyContent: "center",
-        display: "flex"
-      }}>
-        <div className='card ' style={{ width: "50em", marginTop: "100px", marginBottom: "80px" }}>
+      <div className='top'>
+        <div className='card top1'>
           <br></br>
           <div className='card-body'>
             <button type='button' className="btn btn-outline-dark" onClick={() => navigator('/passengers')}>&lt;-</button>
-            <h1 className="heading"> {pageTitle()} </h1>
+            <div className='d'>
+              <h1 className="heading"> {pageTitle()} </h1>
+            </div>
 
             <Form onSubmit={handleSubmit(onSubmit)}>
               <div className={`mb-3 row border-0 form-control ${errors.passengerType ? 'is-invalid' : ''}`} style={{ display: "flex" }}>
-                <label htmlFor="passengerType" className="col-sm-3 col-form-label">Passenger type</label>
-                <div className="col-sm-9" style={{ paddingTop: "calc(.375rem + var(--bs-border-width))" }}>
-                  <div className="form-check form-check-inline">
+                <label htmlFor="passengerType" className="col-sm-3 col-form-label" style={{ paddingLeft: "0px" }}>Passenger type</label>
+                <div className="col-sm-9 row" style={{ paddingTop: "calc(.375rem + var(--bs-border-width))" }}>
+                  <div className="col-xs-9 col-md-3  form-check form-check-inline">
                     <input className="form-check-input" type="radio" name="passengerType" id="passengerType1" value="Normal User" {...register('passengerType')} />
-                    <label className="form-check-label" htmlFor="passengerType">Normal User</label>
+                    <label className="form-check-label" htmlFor="passengerType1">Normal User</label>
                   </div>
-                  <div className="form-check form-check-inline">
+                  <div className="col-xs-9 col-md-3  form-check form-check-inline">
                     <input className="form-check-input" type="radio" name="passengerType" id="passengerType2" value="Person With Disablity/Escort" {...register('passengerType')} />
-                    <label className="form-check-label" htmlFor="passengerType">Person With Disablity/Escort</label>
+                    <label className="form-check-label" htmlFor="passengerType2">Person With Disablity/Escort</label>
                   </div>
-                  <div className="form-check form-check-inline">
+                  <div className="col-xs-9 col-md-3 form-check form-check-inline">
                     <input className="form-check-input" type="radio" name="passengerType" id="passengerType3" value="Journalist"{...register('passengerType')} />
-                    <label className="form-check-label" htmlFor="passengerType">Journalist</label>
+                    <label className="form-check-label" htmlFor="passengerType3">Journalist</label>
                   </div>
                   {errors.passengerType && <div className='invalid-feedback' style={{ display: "flex" }}>{errors.passengerType.message}</div>}
                 </div>
@@ -152,8 +149,7 @@ export const Passenger = () => {
                 <div className="col-sm-7" name='fullName'>
                   <input type="text" placeholder='Enter Passenger name'
                     name='fullName'
-
-                    className={`form-control ${errors.fullName ? 'is-invalid' : ''}`} id="inputPassword"
+                    className={`form-control ${errors.fullName ? 'is-invalid' : ''}`} id="fullName"
                     {...register('fullName')} />
                   {errors.fullName && <div className='invalid-feedback'>{errors.fullName.message}</div>}
                 </div>
@@ -165,7 +161,6 @@ export const Passenger = () => {
                 <div className="col-sm-7">
                   <input type="date" placeholder='Enter Passenger DOB'
                     name='dob'
-
                     className={`form-control ${errors.dob ? 'is-invalid' : ''}`}
                     id='dob'
                     {...register('dob')} />
@@ -176,19 +171,19 @@ export const Passenger = () => {
 
 
               <div className={`mb-3 row border-0 form-control ${errors.passengerType ? 'is-invalid' : ''}`} style={{ display: "flex" }}>
-                <label htmlFor="gender" className="col-sm-3 col-form-label">Gender*:</label>
-                <div className="col-sm-7 " style={{ paddingTop: "calc(.375rem + var(--bs-border-width))" }}>
-                  <div className="form-check form-check-inline">
-                    <input className="form-check-input" type="radio" name="gender" id="male" value="MALE" {...register('gender')} />
-                    <label className="form-check-label" htmlFor="gender">Male</label>
+                <label htmlFor="gender" className="col-sm-3 col-form-label" style={{ paddingLeft: "0px" }}>Gender*:</label>
+                <div className="col-sm-9 row " style={{ paddingTop: "calc(.375rem + var(--bs-border-width))" }}>
+                  <div className="col-xs-9 col-md-3 form-check form-check-inline">
+                    <input className="form-check-input" type="radio" name="gender" id="gender1" value="MALE" {...register('gender')} />
+                    <label className="form-check-label" htmlFor="gender1">Male</label>
                   </div>
-                  <div className="form-check form-check-inline">
-                    <input className="form-check-input" type="radio" value="FEMALE" name="gender" {...register('gender')} id="female" />
-                    <label className="form-check-label" htmlFor="gender">Female</label>
+                  <div className=" col-xs-9 col-md-3 form-check form-check-inline">
+                    <input className="form-check-input" type="radio" value="FEMALE" name="gender" {...register('gender')} id="gender2" />
+                    <label className="form-check-label" htmlFor="gender2">Female</label>
                   </div>
-                  <div className="form-check form-check-inline">
-                    <input className="form-check-input" type="radio" value="TRANS" name="gender" {...register('gender')} id="trans" />
-                    <label className="form-check-label" htmlFor="gender">TransGender</label>
+                  <div className="col-xs-9 col-md-3 form-check form-check-inline">
+                    <input className="form-check-input" type="radio" value="TRANS" name="gender" {...register('gender')} id="gender3" />
+                    <label className="form-check-label" htmlFor="gender3">TransGender</label>
                   </div>
                   {errors.gender && <div className='invalid-feedback' style={{ display: "flex" }}>{errors.gender.message}</div>}
                 </div>
@@ -243,8 +238,6 @@ export const Passenger = () => {
                     type='text'
                     placeholder='Id Card Number'
                     name='idNumber'
-
-                    // value={idNumber}
                     className={`form-control ${errors.idNumber ? 'is-invalid' : ''}`}
                     {...register('idNumber')} id='idNumber'
                   />
@@ -252,12 +245,6 @@ export const Passenger = () => {
                 </div>
               </div>
 
-              {/* <div style={{ display: "flex" }}>
-                <button type="submit" className="btn btn-primary btn-lg" disabled={isSubmitting} style={{ marginRight: "25px" }}
-                >Save</button>
-                <button type="reset" className="btn btn-secondary btn-lg" onClick={reset} style={{ marginRight: "25px"} } >Reset</button>
-                
-              </div> */}
               {pageBottom()}
 
             </Form>
