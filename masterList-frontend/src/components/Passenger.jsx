@@ -6,6 +6,8 @@ import { createPassenger, getPassenger, updatePassenger, listPassengers } from '
 import { useNavigate, useParams } from 'react-router-dom';
 import '../Passenger.css';
 import Form from 'react-bootstrap/Form';
+import { PageTitle } from '../Helpers/PageTitle';
+import { PageBottom } from '../Helpers/PageBottom';
 
 
 export const Passenger = () => {
@@ -14,15 +16,32 @@ export const Passenger = () => {
   const { id } = useParams();
 
   const validationSchema = Yup.object().shape({
-    fullName: Yup.string().required('Full name is required'),
+    fullName: Yup.string().required('Full name is required')
+    .min(2,'Full Name must be at least 2 characters')
+    .max(25,'Full Name must not exceed 25 characters')
+    .matches(/^[a-zA-Z\s]+$/,'Full Name must contain only letters and spaces'),
+
     passengerType: Yup.string().required('passenger Type is required'),
     gender: Yup.string().required('gender is required'),
     berth: Yup.string().required('berth preference is required'),
     food: Yup.string().required('Food choice is required'),
     dob: Yup.string().required('dob is required'),
     idType: Yup.string().required('id Type is required'),
-    idNumber: Yup.string().required('Card Number is required')
 
+    idNumber: Yup.string()
+    .required('ID number is required')
+    .when('idType',{
+      is:'PAN',
+      then:()=>Yup.string()
+      .matches(/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/,'INVALID PAN number')
+      .length(10,'PAN number must be exactly 10 characters long'),
+      otherwise:Yup.string().when('idType',{
+      is:'AADHAAR',
+      then:()=>Yup.string()
+      .matches(/^\d{12}$/,'INVALID AADHAAR number')
+      .length(10,'AADHAAR number must be exactly 12 characters long'),
+    })
+    })
   });
 
   const {
@@ -36,13 +55,18 @@ export const Passenger = () => {
   });
 
   const [passengers, setPassengers] = useState([]);
+  
+  const [passenger,setPassenger]=useState();
 
   useEffect(() => {
     if (id) {
       getPassenger(id).then((response) => {
+        setPassenger(response.data);
         reset(response.data);
+
       }).catch(error => {
         console.error(error);
+        alert("Connection with server lost.Passenger can't be retrieved right now.Try again later")
       });
     }
   }, [id, reset]);
@@ -52,30 +76,25 @@ export const Passenger = () => {
       setPassengers(response.data);
     }).catch(error => {
       console.error(error);
-    }
-
-    )
+    })
   }, []);
 
   const onSubmit = (data) => {
     if (id) {
-      getPassenger(id).then((response) => {
-        if (((response.data.idType === data.idType) && (response.data.idNumber === data.idNumber)) || ((response.data.idType != data.idType) && (response.data.idNumber != data.idNumber))) {
-          updatePassenger(id, data).then((response) => {
-
+           if(((passenger.idType=== data.idType) && (passenger.idNumber === data.idNumber)) || ((passenger.idType != data.idType) )) {
+            updatePassenger(id, data).then((response) => {
+                    navigator('/passengers');
+                  }).catch(error => {
+                    console.error(error);
+                    alert('Connection with server lost.Passenger is not  updated right now .Please try again after some time')
+                  })
+           }
+           else {
+            alert("Connection with server lost.Passenger can't be updated as another passenger with same id no and type exists already")
             navigator('/passengers');
-          }).catch(error => {
-            console.error(error);
-          })
+          }
         }
 
-        else {
-          alert("Passenger can't be updated as another passenger with same id no and type exists already")
-          navigator('/passengers');
-        }
-
-      })
-    }
     else {
       if (isDuplicate(data)) {
         alert("Passenger already exists");
@@ -86,30 +105,15 @@ export const Passenger = () => {
           navigator('/passengers');
         }).catch(error => {
           console.error(error);
+          alert('New Passenger is not created at moment.Please try again after some time')
         });
       }
-
     }
   };
-
 
   const isDuplicate = (passenger) => {
     return passengers.some(p => p.idType === passenger.idType && p.idNumber === passenger.idNumber);
   };
-
-  const pageTitle = () => {
-    return id ? "Update Passenger" : "Add Passenger"
-  }
-
-
-  const pageBottom = () => {
-    return id ? <div className='bottom' ><button type="submit" className="btn btn-primary btn-lg" disabled={isSubmitting} style={{ marginRight: "25px" }}
-    >Update</button> </div> : (<div className='bottom'>
-      <button type="submit" className="btn btn-primary btn-lg" disabled={isSubmitting} style={{ marginRight: "25px" }}
-      >Save</button>
-      <button type="reset" className="btn btn-secondary btn-lg" onClick={reset} style={{ marginRight: "25px" }}>Reset</button> </div>)
-  }
-
 
   return (
     <>
@@ -119,10 +123,10 @@ export const Passenger = () => {
           <div className='card-body'>
             <button type='button' className="btn btn-outline-dark" onClick={() => navigator('/passengers')}>&lt;-</button>
             <div className='d'>
-              <h1 className="heading"> {pageTitle()} </h1>
+              <h1 className="heading"><PageTitle id={id}/></h1>
             </div>
 
-            <Form onSubmit={handleSubmit(onSubmit)}>
+            <Form onSubmit={handleSubmit(onSubmit)} style={{padding: "11px"}}>
               <div className={`mb-3 row border-0 form-control ${errors.passengerType ? 'is-invalid' : ''}`} style={{ display: "flex" }}>
                 <label htmlFor="passengerType" className="col-sm-3 col-form-label" style={{ paddingLeft: "0px" }}>Passenger type</label>
                 <div className="col-sm-9 row" style={{ paddingTop: "calc(.375rem + var(--bs-border-width))" }}>
@@ -142,8 +146,6 @@ export const Passenger = () => {
                 </div>
               </div>
 
-
-
               <div className="mb-3 row">
                 <label htmlFor="fullName" className="col-sm-3 col-form-label">Name*:</label>
                 <div className="col-sm-7" name='fullName'>
@@ -154,7 +156,6 @@ export const Passenger = () => {
                   {errors.fullName && <div className='invalid-feedback'>{errors.fullName.message}</div>}
                 </div>
               </div>
-
 
               <div className="mb-3 row">
                 <label htmlFor="dob" className="col-sm-3 col-form-label">Date Of Birth*:</label>
@@ -168,9 +169,7 @@ export const Passenger = () => {
                 </div>
               </div>
 
-
-
-              <div className={`mb-3 row border-0 form-control ${errors.passengerType ? 'is-invalid' : ''}`} style={{ display: "flex" }}>
+              <div className={`mb-3 row border-0 form-control ${errors.gender ? 'is-invalid' : ''}`} style={{ display: "flex" }}>
                 <label htmlFor="gender" className="col-sm-3 col-form-label" style={{ paddingLeft: "0px" }}>Gender*:</label>
                 <div className="col-sm-9 row " style={{ paddingTop: "calc(.375rem + var(--bs-border-width))" }}>
                   <div className="col-xs-9 col-md-3 form-check form-check-inline">
@@ -188,7 +187,6 @@ export const Passenger = () => {
                   {errors.gender && <div className='invalid-feedback' style={{ display: "flex" }}>{errors.gender.message}</div>}
                 </div>
               </div>
-
 
               <div className="mb-3 row">
                 <label htmlFor="berth" className="col-sm-3 col-form-label">Berth preference*:</label>
@@ -217,7 +215,6 @@ export const Passenger = () => {
                 </div>
               </div>
 
-
               <div className="mb-3 row">
                 <label htmlFor="idType" className="col-sm-3 col-form-label">Id Card Type:</label>
                 <div className="col-sm-7">
@@ -244,9 +241,8 @@ export const Passenger = () => {
                   {errors.idNumber && <div className='invalid-feedback'>{errors.idNumber.message}</div>}
                 </div>
               </div>
-
-              {pageBottom()}
-
+               
+               <PageBottom id={id} reset={reset} isSubmitting={isSubmitting}/>
             </Form>
           </div>
         </div>

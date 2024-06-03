@@ -16,6 +16,7 @@ export const ListPassengers = () => {
             setPassengers(response.data);
         }).catch(error => {
             console.error(error);
+            alert("Passengers list is not accessible at moment.Please try again after some time")
         })
     }
 
@@ -33,6 +34,7 @@ export const ListPassengers = () => {
             getAllPassengers();
         }).catch(error => {
             console.error(error);
+            alert("Connection with Server is lost .Passenger is not deleted.Please try again after some time")
         })
     }
 

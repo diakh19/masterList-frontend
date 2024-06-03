@@ -11,8 +11,8 @@ export const Home = () => {
                         <h5 className="card-title">My Profile</h5>
                         <p className="card-text">LETS BEGIN THE JOURNEY!!</p>
                         <div style={{ display: "flex", justifyContent: "space-between" }}>
-                            <a href="http://localhost:3000/passengers" className="btn btn-primary" style={{ marginRight: "10px" }}>VIEW / MODIFY PASSENGERS</a>
-                            <a href='http://localhost:3000/add-passenger' className="btn btn-primary" >ADD PASSENGER</a>
+                            <a href="/passengers" className="btn btn-primary" style={{ marginRight: "10px" }}>VIEW / MODIFY PASSENGERS</a>
+                            <a href='/add-passenger' className="btn btn-primary" >ADD PASSENGER</a>
                         </div>
                     </div>
                 </div>
