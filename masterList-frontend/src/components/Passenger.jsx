@@ -8,6 +8,7 @@ import '../Passenger.css';
 import Form from 'react-bootstrap/Form';
 import { PageTitle } from '../Helpers/PageTitle';
 import { PageBottom } from '../Helpers/PageBottom';
+import { toast } from 'react-toastify';
 
 
 export const Passenger = () => {
@@ -127,7 +128,7 @@ export const Passenger = () => {
             <Form onSubmit={handleSubmit(onSubmit)} style={{ padding: "11px" }}>
               <div className={`mb-3 row border-0 form-control ${errors.passengerType ? 'is-invalid' : ''}`} style={{ display: "flex" }}>
                 <label htmlFor="passengerType" className="col-sm-3 col-form-label" style={{ paddingLeft: "0px" }}>Passenger type</label>
-                <div className="col-sm-9 row" style={{ paddingTop: "calc(.375rem + var(--bs-border-width))" }}>
+                <div className="col-sm-9 row rad" style={{paddingLeft:"20px"}}>
                   <div className="col-xs-9 col-md-3  form-check form-check-inline">
                     <input className="form-check-input" type="radio" name="passengerType" id="passengerType1" value="Normal User" {...register('passengerType')} />
                     <label className="form-check-label" htmlFor="passengerType1">Normal User</label>
@@ -169,7 +170,7 @@ export const Passenger = () => {
 
               <div className={`mb-3 row border-0 form-control ${errors.gender ? 'is-invalid' : ''}`} style={{ display: "flex" }}>
                 <label htmlFor="gender" className="col-sm-3 col-form-label" style={{ paddingLeft: "0px" }}>Gender*:</label>
-                <div className="col-sm-9 row " style={{ paddingTop: "calc(.375rem + var(--bs-border-width))" }}>
+                <div className="col-sm-9 row rad " style={{paddingLeft:"20px"}} >
                   <div className="col-xs-9 col-md-3 form-check form-check-inline">
                     <input className="form-check-input" type="radio" name="gender" id="gender1" value="MALE" {...register('gender')} />
                     <label className="form-check-label" htmlFor="gender1">Male</label>

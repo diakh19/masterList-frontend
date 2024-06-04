@@ -16,7 +16,7 @@ export const ListPassengers = () => {
             setPassengers(response.data);
         }).catch(error => {
             console.error(error);
-            alert("Passengers list is not accessible at moment.Please try again after some time")
+            alert("Connection with Server is lost.Passengers list is not accessible at moment.Please try again after some time")
         })
     }
 
