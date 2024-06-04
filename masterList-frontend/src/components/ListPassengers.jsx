@@ -42,7 +42,7 @@ export const ListPassengers = () => {
         <>
             {(passengers.length > 0) ?
                 <div className='container container1' >
-                    <h2 className='text-center' style={{ marginBottom: "30px" }}> SAVED PASSENGERS</h2>
+                    <h2 className='text-center margin' > SAVED PASSENGERS</h2>
                     <button className='btn btn-outline-dark mb-2' onClick={addNewPassenger}>ADD PASSENGER</button>
                     <div className='table-responsive'>
                         <table className='table table-striped table-hover table-bordered'>
@@ -55,10 +55,8 @@ export const ListPassengers = () => {
                                     <th className="items">Berth</th>
                                     <th className="items">Food</th>
                                     <th className="items">DOB</th>
-
                                     <th className="items">ID type</th>
                                     <th className="items">Id no.</th>
-
                                     <th className="items">Actions</th>
                                 </tr>
                             </thead>
