@@ -100,7 +100,10 @@ export const Passenger = () => {
       else {
         try {
           await createPassenger(data)
+          
           navigator('/passengers');
+
+          
         }
         catch (error) {
           console.error(error);
@@ -180,8 +183,8 @@ export const Passenger = () => {
                     <label className="form-check-label" htmlFor="gender2">Female</label>
                   </div>
                   <div className="col-xs-9 col-md-3 form-check form-check-inline">
-                    <input className="form-check-input" type="radio" value="TRANS" name="gender" {...register('gender')} id="gender3" />
-                    <label className="form-check-label" htmlFor="gender3">TransGender</label>
+                    <input className="form-check-input" type="radio" value="Others" name="gender" {...register('gender')} id="gender3" />
+                    <label className="form-check-label" htmlFor="gender3">Others</label>
                   </div>
                   {errors.gender && <div className='invalid-feedback' style={{ display: "flex" }}>{errors.gender.message}</div>}
                 </div>
