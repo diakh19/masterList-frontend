@@ -29,7 +29,9 @@ export const Passenger = () => {
     dob: Yup.date()
     .required('dob is required')
     .max(new Date(),'Date Of Birth cannot be in future')
-    .min(new Date('1900-01-01'),'Date Of Birth cannot be before 1st january,1900'),
+    .min(new Date('1900-01-01'),'Date Of Birth cannot be before 1st january,1900')
+    .typeError("Invalid Date!"),
+    
 
     idType: Yup.string().required('id Type is required'),
 
