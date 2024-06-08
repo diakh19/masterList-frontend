@@ -7,7 +7,7 @@ import { BrowserRouter,RouterProvider, Routes, Route, createBrowserRouter } from
 import { Passenger } from './components/Passenger'
 import { Home } from './components/Home'
 import { NotFound } from './components/NotFound'
-import {ToastContainer} from 'react-toastify'
+
 
 
 const routes=[
@@ -38,7 +38,7 @@ const router= createBrowserRouter(routes);
 function App() {
   return (
     <>
-    <ToastContainer/>
+    
     <Header/>
     <RouterProvider router={router}/>
     <Footer/>
