@@ -15,10 +15,6 @@
     display: inline-block;
 }
 
-.items {
-    vertical-align: middle;
-}
-
 .actions {
     display: flex;
     justify-content: space-between;
@@ -63,4 +59,13 @@
 
 .rad{
      padding-top: calc(.375rem + var(--bs-border-width));
+}
+
+td{
+    vertical-align: middle;
+    text-align: center !important;
+}
+th{
+    vertical-align: middle;
+    text-align: center !important;
 }

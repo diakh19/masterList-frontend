@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { deletePassenger, listPassengers } from '../services/PassengerService';
 import { useNavigate } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify'
+import { toast } from "react-toastify"
 
 export const ListPassengers = () => {
     const [passengers, setPassengers] = useState([]);
@@ -32,32 +34,35 @@ export const ListPassengers = () => {
         console.log(id);
         deletePassenger(id).then((response) => {
             getAllPassengers();
+
         }).catch(error => {
             console.error(error);
             alert("Connection with Server is lost .Passenger is not deleted.Please try again after some time")
         })
+        alert("Passenger deleted successfully");
     }
 
     return (
         <>
             {(passengers.length > 0) ?
                 <div className='container container1' >
+
                     <h2 className='text-center margin' > SAVED PASSENGERS</h2>
                     <button className='btn btn-outline-dark mb-2' onClick={addNewPassenger}>ADD PASSENGER</button>
                     <div className='table-responsive'>
                         <table className='table table-striped table-hover table-bordered'>
                             <thead>
                                 <tr>
-                                    <th className="items">S.NO.</th>
-                                    <th className="items">Passenger Name</th>
-                                    <th className="items">Passenger Type</th>
-                                    <th className="items">Gender</th>
-                                    <th className="items">Berth</th>
-                                    <th className="items">Food</th>
-                                    <th className="items">DOB</th>
-                                    <th className="items">ID type</th>
-                                    <th className="items">Id no.</th>
-                                    <th className="items">Actions</th>
+                                    <th >S.NO.</th>
+                                    <th >Passenger Name</th>
+                                    <th >Passenger Type</th>
+                                    <th >Gender</th>
+                                    <th >Berth</th>
+                                    <th >Food</th>
+                                    <th >DOB</th>
+                                    <th >ID type</th>
+                                    <th >Id No.</th>
+                                    <th >Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -65,17 +70,20 @@ export const ListPassengers = () => {
                                     passengers.map((passenger, num) =>
                                         <tr key={passenger.id}>
                                             <td>{num + 1}</td>
-                                            <td className="items">{passenger.fullName}</td>
-                                            <td className="items">{passenger.passengerType}</td>
-                                            <td className="items">{passenger.gender}</td>
-                                            <td className="items">{passenger.berth}</td>
-                                            <td className="items">{passenger.food}</td>
-                                            <td className="items">{passenger.dob}</td>
-                                            <td className="items">{passenger.idType}</td>
-                                            <td className="items">{passenger.idNumber}</td>
-                                            <td className="actions">
-                                                <button className='btn btn-info ' onClick={() => updatePassenger(passenger.id)}>Update</button>
-                                                <button className='btn btn-danger' onClick={() => removePassenger(passenger.id)} style={{ marginLeft: "10px" }}>Delete</button>
+                                            <td >{passenger.fullName}</td>
+                                            <td >{passenger.passengerType}</td>
+                                            <td >{passenger.gender}</td>
+                                            <td >{passenger.berth}</td>
+                                            <td >{passenger.food}</td>
+                                            <td >{passenger.dob}</td>
+                                            <td >{passenger.idType}</td>
+                                            <td >{passenger.idNumber}</td>
+                                            <td >
+                                                <div className="actions ">
+                                                    <button className='btn btn-info ' onClick={() => updatePassenger(passenger.id)}>Update</button>
+                                                    <button className='btn btn-danger' onClick={() => removePassenger(passenger.id)} style={{ marginLeft: "10px" }}>Delete</button>
+                                                </div>
+
                                             </td>
                                         </tr>)
                                 }
