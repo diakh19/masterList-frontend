@@ -8,7 +8,7 @@ import '../Passenger.css';
 import Form from 'react-bootstrap/Form';
 import { PageTitle } from '../Helpers/PageTitle';
 import { PageBottom } from '../Helpers/PageBottom';
-import { toast } from 'react-toastify';
+
 
 
 export const Passenger = () => {
@@ -19,7 +19,7 @@ export const Passenger = () => {
   const validationSchema = Yup.object().shape({
     fullName: Yup.string().required('Full name is required')
       .min(2, 'Full Name must be at least 2 characters')
-      .max(25, 'Full Name must not exceed 25 characters')
+      .max(200, 'Full Name must not exceed 200 characters')
       .matches(/^[a-zA-Z\s]+$/, 'Full Name must contain only letters and spaces'),
 
     passengerType: Yup.string().required('passenger Type is required'),
@@ -27,25 +27,23 @@ export const Passenger = () => {
     berth: Yup.string().required('berth preference is required'),
     food: Yup.string().required('Food choice is required'),
     dob: Yup.date()
-    .required('dob is required')
-    .max(new Date(),'Date Of Birth cannot be in future')
-    .min(new Date('1900-01-01'),'Date Of Birth cannot be before 1st january,1900')
-    .typeError("Invalid Date!"),
-    
+      .required('dob is required')
+      .max(new Date(), 'Date Of Birth cannot be in future')
+      // .min(new Date('1900-01-01'),'Date Of Birth cannot be before 1st january,1900')
+      .typeError("Date is required! "),
+
 
     idType: Yup.string().required('id Type is required'),
 
     idNumber: Yup.string()
       .required('ID number is required')
-      .length(10,'Id number must be exactly 10 characters long')
+      .length(10, 'Id number must be exactly 10 characters long')
   });
 
   const {
     register,
     handleSubmit,
-    control,
     reset,
-    trigger,
     formState: { errors, isSubmitting },
   } = useForm({
     resolver: yupResolver(validationSchema),
@@ -59,6 +57,7 @@ export const Passenger = () => {
     if (id) {
       getPassenger(id).then((response) => {
         setPassenger(response.data);
+
         reset(response.data);
 
       }).catch(error => {
@@ -78,46 +77,31 @@ export const Passenger = () => {
 
   const onSubmit = async (data) => {
     if (id) {
-      if (((passenger.idType === data.idType) && (passenger.idNumber === data.idNumber)) || ((passenger.idType != data.idType)&&(passenger.idNumber != data.idNumber))) {
-        try {
-          await updatePassenger(id, data)
-          navigator('/passengers');
-        }
-        catch (error) {
-          console.error(error);
-          alert('Connection with server lost.Passenger is not  updated right now .Please try again after some time')
-        }
+      try {
+        await updatePassenger(id, data)
+        navigator('/passengers');
+        alert("Passenger Updated Successfully.");
       }
-      else {
-        alert("Connection with server lost.Passenger can't be updated as another passenger with same id no and type exists already")
+      catch (error) {
+        console.error(error);
+        alert("Update Passenger is not possible.Another passenger with given IdType and IdNumber already exists in List")
         navigator('/passengers');
       }
     }
 
     else {
-      if (isDuplicate(data)) {
-        alert("Passenger already exists");
-        reset();
+      try {
+        await createPassenger(data);
+        navigator('/passengers');
+        alert("Passenger added Successfully.");
       }
-      else {
-        try {
-          await createPassenger(data)
-          
-          navigator('/passengers');
-
-          
-        }
-        catch (error) {
-          console.error(error);
-          alert('Connection with server lost.New Passenger is not created at moment.Please try again after some time')
-        }
+      catch (error) {
+        console.error(error);
+        alert("Passenger with given IdNumber and IdType already exists in List.Please Enter different id details");
       }
     }
   };
 
-  const isDuplicate = (passenger) => {
-    return passengers.some(p => p.idType === passenger.idType && p.idNumber === passenger.idNumber);
-  };
 
   return (
     <>
@@ -133,13 +117,13 @@ export const Passenger = () => {
             <Form onSubmit={handleSubmit(onSubmit)} style={{ padding: "11px" }}>
               <div className={`mb-3 row border-0 form-control ${errors.passengerType ? 'is-invalid' : ''}`} style={{ display: "flex" }}>
                 <label htmlFor="passengerType" className="col-sm-3 col-form-label" style={{ paddingLeft: "0px" }}>Passenger type</label>
-                <div className="col-sm-9 row rad" style={{paddingLeft:"20px"}}>
+                <div className="col-sm-9 row rad" style={{ paddingLeft: "20px" }}>
                   <div className="col-xs-9 col-md-3  form-check form-check-inline">
                     <input className="form-check-input" type="radio" name="passengerType" id="passengerType1" value="Normal User" {...register('passengerType')} />
                     <label className="form-check-label" htmlFor="passengerType1">Normal User</label>
                   </div>
                   <div className="col-xs-9 col-md-3  form-check form-check-inline">
-                    <input className="form-check-input" type="radio" name="passengerType" id="passengerType2" value="Person With Disablity/Escort" {...register('passengerType')} />
+                    <input className="form-check-input" type="radio" name="passengerType" id="passengerType2" value="Person With Disability" {...register('passengerType')} />
                     <label className="form-check-label" htmlFor="passengerType2">Person With Disablity/Escort</label>
                   </div>
                   <div className="col-xs-9 col-md-3 form-check form-check-inline">
@@ -175,13 +159,13 @@ export const Passenger = () => {
 
               <div className={`mb-3 row border-0 form-control ${errors.gender ? 'is-invalid' : ''}`} style={{ display: "flex" }}>
                 <label htmlFor="gender" className="col-sm-3 col-form-label" style={{ paddingLeft: "0px" }}>Gender*:</label>
-                <div className="col-sm-9 row rad " style={{paddingLeft:"20px"}} >
+                <div className="col-sm-9 row rad " style={{ paddingLeft: "20px" }} >
                   <div className="col-xs-9 col-md-3 form-check form-check-inline">
-                    <input className="form-check-input" type="radio" name="gender" id="gender1" value="MALE" {...register('gender')} />
+                    <input className="form-check-input" type="radio" name="gender" id="gender1" value="Male" {...register('gender')} />
                     <label className="form-check-label" htmlFor="gender1">Male</label>
                   </div>
                   <div className=" col-xs-9 col-md-3 form-check form-check-inline">
-                    <input className="form-check-input" type="radio" value="FEMALE" name="gender" {...register('gender')} id="gender2" />
+                    <input className="form-check-input" type="radio" value="Female" name="gender" {...register('gender')} id="gender2" />
                     <label className="form-check-label" htmlFor="gender2">Female</label>
                   </div>
                   <div className="col-xs-9 col-md-3 form-check form-check-inline">
@@ -226,7 +210,6 @@ export const Passenger = () => {
                     <option selected value="">Select ID TYPE</option>
                     <option value='PAN' id='PAN' >PAN CARD</option>
                     <option value='AADHAAR' id='AADHAAR'   >AADHAAR CARD</option>
-
                   </select>
                   {errors.idType && <div className='invalid-feedback'>{errors.idType.message}</div>}
                 </div>
